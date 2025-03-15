@@ -107,14 +107,24 @@ category_avg_summary = category_avg.groupby("day_type")["cnt"].mean().reset_inde
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    holiday_value = category_avg_summary.loc[category_avg_summary["day_type"] == "Holiday", "cnt"].values[0]
+    if "Holiday" in category_avg_summary["day_type"].values:
+        holiday_value = category_avg_summary.loc[category_avg_summary["day_type"] == "Holiday", "cnt"].values[0]
+    else:
+        holiday_value = 0
     st.metric("Holiday", f"{holiday_value:,.0f}")
 with col2:
-    weekend_value = category_avg_summary.loc[category_avg_summary["day_type"] == "Weekend", "cnt"].values[0]
+    if "Weekend" in category_avg_summary["day_type"].values:
+        weekend_value = category_avg_summary.loc[category_avg_summary["day_type"] == "Weekend", "cnt"].values[0]
+    else:
+        weekend_value = 0
     st.metric("Weekend", f"{weekend_value:,.0f}")
 with col3:
-    workday_value = category_avg_summary.loc[category_avg_summary["day_type"] == "Workday", "cnt"].values[0]
+    if "Workday" in category_avg_summary["day_type"].values:
+        workday_value = category_avg_summary.loc[category_avg_summary["day_type"] == "Workday", "cnt"].values[0]
+    else:
+        workday_value = 0
     st.metric("Workday", f"{workday_value:,.0f}")
+
 
 filtered_category_avg = category_avg[
     (category_avg["dteday"] >= start_date) & (category_avg["dteday"] <= end_date)
@@ -140,20 +150,35 @@ labels = ["Dini Hari", "Pagi", "Siang", "Sore", "Malam"]
 
 col1, col2, col3, col4, col5 = st.columns(5)
 with col1:
-    dini_hari_value = time_analysis[time_analysis["time_category"] == "Dini Hari"]["avg_peminjaman"].values
-    st.metric("Dini Hari", f"{dini_hari_value[0]:,.0f}")
+    if "Dini Hari" in time_analysis["time_category"].values:
+        dini_hari_value = time_analysis.loc[time_analysis["time_category"] == "Dini Hari", "avg_peminjaman"].values[0]
+    else:
+        dini_hari_value = 0
+    st.metric("Dini Hari", f"{dini_hari_value:,.0f}")
 with col2:
-    pagi_value = time_analysis[time_analysis["time_category"] == "Pagi"]["avg_peminjaman"].values
-    st.metric("Pagi", f"{pagi_value[0]:,.0f}")
+    if "Pagi" in time_analysis["time_category"].values:
+        pagi_value = time_analysis.loc[time_analysis["time_category"] == "Pagi", "avg_peminjaman"].values[0]
+    else:
+        pagi_value = 0
+    st.metric("Pagi", f"{pagi_value:,.0f}")
 with col3:
-    siang_value = time_analysis[time_analysis["time_category"] == "Siang"]["avg_peminjaman"].values
-    st.metric("Siang", f"{siang_value[0]:,.0f}")
+    if "Siang" in time_analysis["time_category"].values:
+        siang_value = time_analysis.loc[time_analysis["time_category"] == "Siang", "avg_peminjaman"].values[0]
+    else:
+        siang_value = 0
+    st.metric("Siang", f"{siang_value:,.0f}")
 with col4:
-    sore_value = time_analysis[time_analysis["time_category"] == "Sore"]["avg_peminjaman"].values
-    st.metric("Sore", f"{sore_value[0]:,.0f}")
+    if "Sore" in time_analysis["time_category"].values:
+        sore_value = time_analysis.loc[time_analysis["time_category"] == "Sore", "avg_peminjaman"].values[0]
+    else:
+        sore_value = 0
+    st.metric("Sore", f"{sore_value:,.0f}")
 with col5:
-    malam_value = time_analysis[time_analysis["time_category"] == "Malam"]["avg_peminjaman"].values
-    st.metric("Malam", f"{malam_value[0]:,.0f}")
+    if "Malam" in time_analysis["time_category"].values:
+        malam_value = time_analysis.loc[time_analysis["time_category"] == "Malam", "avg_peminjaman"].values[0]
+    else:
+        malam_value = 0
+    st.metric("Malam", f"{malam_value:,.0f}")
 
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.barplot(x="time_category", y="avg_peminjaman", data=time_analysis, order=labels, color="#90CAF9", ax=ax)
