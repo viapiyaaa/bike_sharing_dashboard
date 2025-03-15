@@ -54,7 +54,7 @@ st.header('📊 Bicycle Distribution Dashboard')
 with st.sidebar:
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.image("logo.jpg")
+        st.image("Dashboard/logo.jpg")
         
         # Mengambil start_date & end_date dari date_input
     start_date, end_date = st.date_input(
