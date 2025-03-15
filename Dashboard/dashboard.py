@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 
-day_df = pd.read_csv("day_data.csv")
-hour_df = pd.read_csv("hour_data.csv")
+day_df = pd.read_csv("Dashboard/day_data.csv")
+hour_df = pd.read_csv("Dashboard/hour_data.csv")
 
 def create_classify_day(row):
     if row["holiday"] == 1:
